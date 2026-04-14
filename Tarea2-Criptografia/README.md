@@ -14,7 +14,7 @@ $$
 
 en particular, si se trata de sucesos equiprobables, $I_c(X) = \frac{1}{m}$.
 
-1. Si $z \in \Sigma^n$ y $f_i$ es la frecuencia de aparición de $\sigma_i$ en $z$, entonces:
+2. Si $z \in \Sigma^n$ y $f_i$ es la frecuencia de aparición de $\sigma_i$ en $z$, entonces:
 
 $$
 I_c(z) = \frac{\sum_{i=1}^{m} \binom{f_i}{2}}{\binom{n}{2}} = \frac{\sum_{i=1}^{m} f_i(f_i -1)}{n(n-1)}
@@ -98,10 +98,10 @@ Por lo que:
 Sustituyendo y desarrollando:
 
 $$
-I_c(z) = \frac{ \sum_{i=1}^{m} \frac{f_i(f_i - 1)}{2} }{ \frac{n(n - 1)}{2} } = \frac{\sum_{i=1}^{m} f_i(f_i -1)}{n(n-1)} \quad _\blacksquare
-
+I_c(z) = \frac{ \sum_{i=1}^{m} \frac{f_i(f_i - 1)}{2} }{ \frac{n(n - 1)}{2} } = \frac{\sum_{i=1}^{m} f_i(f_i -1)}{n(n-1)} _\blacksquare
 $$
 
+---
 ### 2. Complejidad algorítmica. Problemas P, NP, NP-Completo.
 
 **Definición**. Se dice que un problema puede resolverse en tiempo polinómico o simplemente que está en P, si una máquina de Turing está diseñada ópticamente para su resolución tras un número de pasos que es una función polinímica de la longitud de los datos de partida.
@@ -188,7 +188,7 @@ Para probar que el Estándar de Encriptación de Datos (DES) está en P, debemos
 - Dado que el número de rondas es fijo (16), el número total de operaciones requeridas para cifrar un bloque es $16c + d$ (donde $d$ son las permutaciones iniciales y finales).
 - El tiempo de ejecución es estricta y determinantemente $O(1)$.
 
-La complejidad $O(1)$ es un polinomio de grado cero ($n^0$). Incluso si se asume un enfoque asintótico donde DES procesa un mensaje de tamaño $N$ dividiéndolo en bloques, el tiempo sería lineal $O(N)$, el cual es un polinomio de grado 1. En cualquier interpretación, el algoritmo opera en tiempo polinómico determinista, por lo tanto, **DES $\in \text{P} \quad _\blacksquare$**
+La complejidad $O(1)$ es un polinomio de grado cero ($n^0$). Incluso si se asume un enfoque asintótico donde DES procesa un mensaje de tamaño $N$ dividiéndolo en bloques, el tiempo sería lineal $O(N)$, el cual es un polinomio de grado 1. En cualquier interpretación, el algoritmo opera en tiempo polinómico determinista, por lo tanto, DES $\in \text{P} _\blacksquare$
 
 #### Demostración 3
 
@@ -222,6 +222,7 @@ Por definición de cota superior, si una función está acotada por $O((\log_2(m
 
 Por lo tanto, queda probado que la complejidad está estrictamente acotada por **$O(m(\log_2(m))^2)$.**
 
+---
 ### 3. RSA. Complejidad tipo P.
 
 Use lo siguiente como cierto e investigue:
@@ -350,6 +351,7 @@ La suma de operaciones polinómicas da como resultado un polinomio. Se demuestra
 
 Al estar acotado estrictamente por un tiempo de ejecución del orden $O((\log n)^3)$, el problema se resuelve de forma determinista en tiempo polinómico. Por lo tanto, la factorización con clave privada conocida $\in \text{P}$.
 
+---
 ### 4. Seguridad en el algoritmo ElGamal
 
 En esta parte se vuelve intersante los temas de seguridad ya que es una aplicación directa de un ataque conocido. Investigue:
@@ -443,6 +445,7 @@ Podemos concluir que:
 - Sin embargo, el atacante no necesita las claves privadas originales. Al sustituir las claves públicas en el tránsito, C obliga a A a cifrar sus mensajes con $y_{C'}$. C descifra el mensaje con su propia clave privada $x_{C'}$, lo lee, y lo vuelve a cifrar con la clave pública de B $y_B$.
 - El algoritmo ElGamal falla en este escenario porque carece de un mecanismo de autenticación. Para mitigar este caso, la clave pública $(p, g, y)$ no debe enviarse en texto plano, sino encapsulada dentro de un Certificado Digital dirmado por una Autoridad Certificadora o utilizar firmas digitales (como DSA/RSA) para garantizar que la clave pública legítimamente pertenece a quien dice ser.
 
+---
 ### 5. Birthday attack aplicado a RSA
 
 Observe que:
@@ -555,6 +558,7 @@ El programa en Python toma las matrices del repositorio y completa el flujo de l
 - **Modo ECB (El código crudo):** La función `des_encrypt` divide el mensaje en bloques de 8 bytes y procesa cada uno con `des_block`. Como no añade ningún vector de inicialización (IV) ni *nonce*, ni altera los bloques basándose en los anteriores, estamos implementando implícitamente el ECB.
 - **Descifrado:** Tomaremos el texto en Base64, lo decodificaremos de vuelta a bytes usando `base64.b64decode`, y aplicaremos `des_decrypt` (que invierte el orden de las subclaves) para recuperar `noche697`.
 
+---
 ### 7. Claves finitas y Playfair
 
 - En el GitHub habrá una lista de palabras en las cuales son representaciones de claves, el trabajo aquí es usar la clave correcta para descifrar el texto en base64 (se basa en el ejercicio anterior), $c = h+F7XMoHpF0=$ y ver cuál es la clave correcta.
