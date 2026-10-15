@@ -1,0 +1,39 @@
+¿En qué directorio guarda gpg las llaves?
+Guarda las llaves, tanto públicas como privadas en el directorio oculto ~/.gnupg/
+¿Y open SSL?
+A diferencia de GPG, OpenSSL no tiene un directorio especializado. Lo que hace es generarlas en el directorio de trabajo actual.
+Explica la razón de esto
+GPG está diseñado para el usuario final, por lo que para una gestión centralizada y sin tanta dificultad lo hace en un directorio dedicado. OpenSSL es una herramienta para desarrolladores, y asume que quien lo usa tiene conocimiento de como manipular los archivos manualmente.
+
+Explica el comando para verificar de openssl, es decir, las banderas.
+Puedes encontrarlo en la presentación pag 18
+El comando es:
+$ openssl rsautl -verify -pubin -inkey publica_inicialesProfesor.pem -in firma.sig -asn1parse
+La explicación de las banderas es la siguiente:
+* rsautl: Indica a openssl que se realizarán operaciones criptográficas con el algoritmo RSA.
+* -verify: Indica que la operación a realizar es una verificación de firma digital, en particular, descifrar el contenido con una llave pública.
+* -pubin: Especifica que le pasaremos una llave pública para trabajar. Sin esta bandera, openssl espera una privada por defecto.
+* -inkey <archivo>: Indica cual es el archivo que es la llave a utilizar, en este caso la llave pública.
+* - in <archivo>: Especifica el archivo que se va a procesar, en este caso el archivo de la firma .sig
+* -asn1parse: Formatea la salida (por defecto en binario) a una estructura ASN.1. Esto permite leer de forma legible la salida y saber que algoritmo de hash se usó (en este caso sha256).
+
+Obtén la firma y el hash de este archivo
+¿Coinciden?¿Es auténtico?
+(La respuesta puede variar para cada estudiante.
+Pero es necesario que tú como estudiante la firma y el hash que vas a enviar sí coincidan)
+Al realizar el comando de verificación de firma, el bloque de bytes nos muestra el siguiente hash:
+8c 0c 53 d8 95 06 6e 7c-2c e9 4b 47 93 a8 a6 13
+5f 67 4a 2d 92 1f f6 c0-e9 59 bb dd 40 f9 c6 13
+Por otro lado, al calcular el hash del archivo de las preguntas (.txt) usando sha256, el resultado fue:
+8c0c53d895066e7c2ce94b4793a8a6135f674a2d921ff6c0e959bbdd40f9c613
+Vemos que ambas cadenas son identicas (sin espacios), probando la autenticación (solo la persona que posee la llave privada pudo haber creado esa firma) y la integridad (el mensaje no sufrió de alteraciones desde su origen).
+
+Así mismo explica el comando para firmar el archivo con openssl.
+El comando para generar nuestra propia firma es: 
+openssl dgst -sha256 -sign privada.pem -out firma.sig respuestas.txt
+* dgst: Indica que se calculara un hash.
+* -sha256: Define el algorimto que se usará para hashear el documento.
+* -sign privada.pem: Le indica a openssl que despues de calcular el hash, debe firmarlo digitalmente cifrandolo con la llave privada indicada (.pem).
+* -out firma.sig: Especifica el nombre del archivo de salida donde se guardará la firma digital resultante.
+* respuestas.txt: Es el archivo de entrada original el cual se calculará el hash para luego firmarlo
+

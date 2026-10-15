@@ -1,0 +1,16 @@
+Gustavo Alonso Dominguez Sanchez
+
+¿Para que se utiliza bandera -a en gpg? ¿Qué pasa si no se utiliza?
+La bandera -a se utiliza para convertir la salida en texto plano legible compuesto por caracteres comunes (letras, números y símbolos básicos). De no usarse, GPG generará el archivo en formato binario.
+
+¿La bandera -d y La bandera -e?
+La bandera -d le indica a GPG que se quiere descifrar un archivo y buscara en nuestro directorio ~/.gnupg la llave privada correspondiente para descifrarlo.
+La bandera -e le indica a GPG que se quiere cifrar un archivo.
+
+¿La bandera -r?
+Solo se usa cuando se cifra algo (-e). La bandera -r se utiliza para indicarle a GPG a quien va dirigido el mensaje. GPG buscara en el directorio la llave pública asociado, en este caso, al correo del destinario y de esta forma, se cifrara bajo esa llave, garantizando que el destinario pueda desencriptarlo con su llave privada.
+
+¿Por qué es necesario hacer --import y --export en gpg?
+Como GPG maneja su propio directorio de llaves tal como si fuera nuestro llavero, se necesita hacer:
+--export: Para copiar nuestra llave pública en un archivo y poder compartirla publicamente y puedan encriptar sus mensajes, de manera que solo nosotros (con la llave privada) podamos desencriptarlos.
+--import: Necesaria para guardar las llaves públicas de otras personas para que GPG sepa la llave correcta con la que encripte los mensajes.

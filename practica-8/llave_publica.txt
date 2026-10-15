@@ -1,0 +1,8 @@
+gpg: creado el directorio '/home/alonsods/.gnupg/openpgp-revocs.d'
+gpg: certificado de revocación guardado como '/home/alonsods/.gnupg/openpgp-revocs.d/351B26BAD2380F67D0670725C370748E083346D9.rev'
+claves pública y secreta creadas y firmadas.
+
+pub   rsa4096 2026-04-30 [SC]
+      351B26BAD2380F67D0670725C370748E083346D9
+uid                      gustavo alonso dominguez sanchez <alonsods@ciencias.unam.mx>
+sub   rsa4096 2026-04-30 [E]
