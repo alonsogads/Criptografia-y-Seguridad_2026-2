@@ -1,5 +1,7 @@
 # Tarea 2
 
+## Algoritmos de cifrado y criptoanálisis
+
 ### 1. Criptoanálisis lineal. Índice de coincidencia.
 
 **Definición**: Sea $\Sigma$ un conjunto finito, $n \in \mathbb{N}$ y $X = (x_1, ..., x_n)$ una variable aleatoria que toma valores en $\Sigma^n$. El índice de coincidencia $I_c(X)$ es la probabilidad de que, para dos índices aleatorios $j,k$ se tenga que $x_j = x_k$.
